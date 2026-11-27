@@ -1,19 +1,19 @@
-CSV総行数            : 169
-ISBN13あり(取得対象) : 92
-ASINのみ(対象外)     : 113   ← 電子書籍。openBDはISBN専用なので引けない
-openBDでヒット       : 92
+CSV総行数            : 270
+ISBN13あり(取得対象) : 168
+ASINのみ(対象外)     : 138   ← 電子書籍。openBDはISBN専用なので引けない
+openBDでヒット       : 168
 openBDに無し         : 0
 書影ダウンロード     : 2   実寸 200〜200px幅
 
 -- 項目ごとの充足率（ヒットした本のうち値が入っている件数）--
-  title      :  92/92
-  title_kana :  92/92
-  author     :  92/92
-  publisher  :  90/92
-  pubdate    :  84/92
-  pages      :   3/92
-  price      :  89/92
-  ccode      :   3/92
-  cover      :   2/92
-  description:   3/92
-  toc        :  22/92
+  title      : 168/168
+  title_kana : 168/168
+  author     : 168/168
+  publisher  : 164/168
+  pubdate    : 156/168
+  pages      :   3/168
+  price      : 161/168
+  ccode      :   3/168
+  cover      :   2/168
+  description:   3/168
+  toc        :  43/168

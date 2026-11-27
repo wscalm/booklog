@@ -7,7 +7,7 @@
 このスクリプトはデータだけを書き出すので、デザインを触っても上書きされない。
 
 書影は bookimg/<ISBN13 または ASIN>.jpg（ブクログCSVの ISBN13、空ならASINがファイル名）
-を参照する。無ければ NO IMAGE のプレースホルダが表示される。
+を参照する。書影の無い本は一覧に載せない（買った日・読んだ日の記録が無い本として扱う）。
 """
 import csv, json, re, unicodedata
 from datetime import date, datetime
@@ -134,7 +134,7 @@ def build():
     ef = HERE / 'data' / 'enrich.json'
     enrich = json.loads(ef.read_text(encoding='utf-8')) if ef.is_file() else {}
 
-    books = []
+    books, skipped = [], []
     for r in rows:
         item_id = r[COL['item_id']]
         key = r[COL['isbn13']].strip() or item_id
@@ -146,7 +146,11 @@ def build():
 
         # 書影は bookimg/<CSVのISBN13 または ASIN>.jpg を参照する
         path = f'bookimg/{key}.jpg'
-        cover = path if (HERE / path).is_file() else ''
+        if not (HERE / path).is_file():
+            # 書影の無い本は「いつ買って、いつ読んだか」の記録が無い本なので載せない
+            skipped.append(r[COL['title']])
+            continue
+        cover = path
 
         label = label_of(r[COL['title']])
         # enrich.json のキーは CSV の ISBN13 または ASIN だが、
@@ -208,6 +212,8 @@ def build():
     n_label = sum(1 for b in books if b['label'])
     print(f'data/books.js を書き出しました: {len(books)}冊 / 書影 {n_cover}枚 / '
           f'ジャンル {n_genre}冊 / レーベル {n_label}冊')
+    if skipped:
+        print(f'書影が無いため載せなかった本: {len(skipped)}冊')
 
 
 if __name__ == '__main__':
