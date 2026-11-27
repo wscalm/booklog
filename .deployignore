@@ -1,5 +1,5 @@
 # 本番に置かないもの（rsync の --exclude-from 形式。先頭の / はリポジトリ直下の意味）
-# ページが使うのは index.html・assets/・data/books.js・data/timeline.js・bookimg/ だけ
+# ページが使うのは index.html・favicon.*・apple-touch-icon.png・assets/・data/books.js・data/timeline.js・bookimg/ だけ
 
 # データを作るためのスクリプトと元データ
 /.gitignore
