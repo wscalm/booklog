@@ -276,7 +276,15 @@ input, select { font: inherit; color: inherit; }
   animation: flow 90s linear infinite;
 }
 .ticker__in span { font-family: var(--sans); font-weight: 700; }
-.ticker__in i { font-style: normal; padding: 0 .9em; opacity: .45; }
+.ticker__in i {
+  /* 区切りの ✳ は Safari で緑の絵文字になるため、文字ではなく図形で描く */
+  --asterisk: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4' stroke='%23000' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E");
+  display: inline-block; width: .85em; height: .85em; margin: 0 .9em;
+  vertical-align: -.1em; opacity: .45;
+  background: currentColor;
+  -webkit-mask: var(--asterisk) center / contain no-repeat;
+          mask: var(--asterisk) center / contain no-repeat;
+}
 .ticker:hover .ticker__in { animation-play-state: paused; }
 @keyframes flow { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .ticker__in { animation: none; } }
