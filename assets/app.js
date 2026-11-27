@@ -70,7 +70,7 @@
   (function ticker() {
     var recent = BOOKS.slice()
       .sort(SORTS.finished).slice(0, 24)
-      .map(function (b) { return '<span>' + esc(b.title.replace(/\s*[（(].*$/, '')) + '</span><i>✳</i>'; })
+      .map(function (b) { return '<span>' + esc(b.title.replace(/\s*[（(].*$/, '')) + '</span><i></i>'; })
       .join('');
     $('#tickerIn').innerHTML = recent + recent;   // 半分ずらして無限に流す
   }());
